@@ -1,0 +1,10 @@
+version=0.29.0
+profile=janestreet
+
+margin = 80
+let-binding-spacing = compact
+
+space-around-arrays = false
+space-around-lists = false
+space-around-records = false
+space-around-variants = false

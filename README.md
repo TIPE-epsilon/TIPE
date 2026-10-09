@@ -1,6 +1,6 @@
 # TIPE
 
-Traducteur
-Informatique pour la
-Programmation en
+Traducteur\n
+Informatique pour la\n
+Programmation en\n
 Epsilon

@@ -1,6 +1,5 @@
-# TIPE
-
-Traducteur\n
-Informatique pour la\n
-Programmation en\n
-Epsilon
+# Traducteur
+# Informatique pour la
+# Programmation en
+# Epsilon
+(shorten as TIPE)

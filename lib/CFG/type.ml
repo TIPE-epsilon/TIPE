@@ -1,11 +1,6 @@
-type bloc = {
-  code : tac list;
-  condition : int option;
-  tbloc : bloc option;
-  ebloc : bloc option;
-}
-type BinOp = Access | Or | And | Eq | Neq | Gr | Ls | Geq | Leq | Add | Sub | Mul | Pow | Div | Mod 
-type UnOp = Deref | Adress | Not | PostIncr | PreIncr | PostDec | Predec | Neg 
+
+type binOp = Access | Or | And | Eq | Neq | Gr | Ls | Geq | Leq | Add | Sub | Mul | Pow | Div | Mod 
+type unOp = Deref | Adress | Not | PostIncr | PreIncr | PostDec | PreDec | Neg 
                                                
 type addressable =
   Var of int
@@ -30,10 +25,9 @@ and expression =
   | Halloc of expression
   | Free of lval
   | Print of expression
-  | BinOp of (BinOp * expression * expression)
-  | UnOp of (UnOp * expression)
-  | Param of expression  
-  | lval
+  | BinOp of (binOp * expression * expression)
+  | UnOp of (unOp * expression)
+  | Var of int
     
 type ast =
   | Bloc of ast list
@@ -44,7 +38,6 @@ type ast =
   | Swap of (lval * lval)
           
 type tac =
-  |Swap of (int*int)
   |Assign of (int*int*int)
   |Swap of (int*int)
   |Halloc of (int*int)
@@ -75,3 +68,10 @@ type tac =
   |PreIncr of (int*int)
   |PreDec of (int*int)
   |Neg of (int*int)
+
+type bloc = {
+  code : tac list;
+  condition : int option;
+  tbloc : bloc option;
+  ebloc : bloc option;
+}

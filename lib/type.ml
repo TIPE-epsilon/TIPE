@@ -4,9 +4,9 @@ type bloc = {
   tbloc : bloc option;
   ebloc : bloc option;
 }
-
-type op = Deref | Adress | Access | Or | And | Eq | Neq | Gr | Ls | Geq | Leq | Not | Add | Sub | Mul | Pow | Div | Mod | PostIncr | PreIncr | PostDec | Predec | Neg 
-          
+type BinOp = Access | Or | And | Eq | Neq | Gr | Ls | Geq | Leq | Add | Sub | Mul | Pow | Div | Mod 
+type UnOp = Deref | Adress | Not | PostIncr | PreIncr | PostDec | Predec | Neg 
+                                               
 type addressable =
   Var of int
 | Access of lval_expr * expression
@@ -26,17 +26,18 @@ and lval =
 and expression =
   | Fcall of (int * expression list)
   | Assign of (lval * expression)
+  | Swap of (lval*lval)
   | Halloc of expression
   | Free of lval
   | Print of expression
-  | BinOp of (op * expression * expression)
-  | UnOp of (op * expression)
+  | BinOp of (BinOp * expression * expression)
+  | UnOp of (UnOp * expression)
   | Param of expression  
   | lval
     
-and ast =
+type ast =
   | Bloc of ast list
-  | While of (expression * ast * ast) (* trois enfants : condition, corps, suite du code*)
+  | While of (expression * ast *(ast option)) (* trois enfants : condition, corps, suite du code*)
   | If of (expression * ast * ast)
   | Fcall of (int * expression list)
   | Assign of (lval * expression)
@@ -45,6 +46,7 @@ and ast =
 type tac =
   |Swap of (int*int)
   |Assign of (int*int*int)
+  |Swap of (int*int)
   |Halloc of (int*int)
   |Free of (int*int)
   |Print of (int*int)
@@ -55,23 +57,21 @@ type tac =
   |Access of (int*int*int)
   |Or of (int*int*int)
   |And of (int*int*int)
-  |Eq of x
-  |Neq of x
-  |Gr of x
-  |Ls of x
-  |Geq of x
-  |Leq of x
-  |Not of y
-  |Add of x
-  |Sub of x
-  |Mul of x
-  |Pow of x
-  |Div of x
-  |Mod of x
-  |PostIncr of y
-  |PostDec of y
-  |PreIncr of y
-  |PreDec of y
-  |Neg of y
-
-    Deref | Adress | Access | Or | And | Eq | Neq | Gr | Ls | Geq | Leq | Not | Add | Sub | Mul | Pow | Div | Mod | PostIncr | PreIncr | PostDec | Predec | Neg 
+  |Eq of (int*int*int)
+  |Neq of (int*int*int)
+  |Gr of (int*int*int)
+  |Ls of (int*int*int)
+  |Geq of (int*int*int)
+  |Leq of (int*int*int)
+  |Not of (int*int)
+  |Add of (int*int*int)
+  |Sub of (int*int*int)
+  |Mul of (int*int*int)
+  |Pow of (int*int*int)
+  |Div of (int*int*int)
+  |Mod of (int*int*int)
+  |PostIncr of (int*int)
+  |PostDec of (int*int)
+  |PreIncr of (int*int)
+  |PreDec of (int*int)
+  |Neg of (int*int)
